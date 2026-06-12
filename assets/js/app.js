@@ -17,7 +17,7 @@ function workspaceApp() {
       modules: 13,
       tools: 8
     },
-    theme: "dark",
+    theme: "light",
     filters: [
       { id: "all", label: "All" },
       { id: "research", label: "Research" },
@@ -121,7 +121,7 @@ function workspaceApp() {
       return labels[this.mode];
     },
     init() {
-      this.theme = localStorage.getItem("schen-theme") || "dark";
+      this.theme = localStorage.getItem("schen-theme") || "light";
       this.updateClock();
       setInterval(() => this.updateClock(), 1000);
 

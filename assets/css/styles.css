@@ -14,6 +14,14 @@ body {
   overflow-x: hidden;
 }
 
+.hero-photo {
+  filter: sepia(0.34) saturate(1.08) brightness(1.08) contrast(0.96);
+}
+
+.dark .hero-photo {
+  filter: sepia(0.42) saturate(1.06) brightness(1.02) contrast(0.95);
+}
+
 .scan-grid {
   position: absolute;
   inset: 0;
