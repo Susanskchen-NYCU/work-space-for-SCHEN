@@ -22,6 +22,32 @@ body {
   filter: sepia(0.42) saturate(1.06) brightness(1.02) contrast(0.95);
 }
 
+.hero-title {
+  color: #5b161f;
+  text-shadow: 0 2px 18px rgba(255, 248, 238, 0.38);
+}
+
+.hero-lead {
+  color: rgba(72, 29, 22, 0.82);
+  text-shadow: 0 1px 14px rgba(255, 248, 238, 0.34);
+}
+
+.hero-kicker {
+  color: #7a1f22;
+}
+
+.dark .hero-title {
+  color: #7d2028;
+}
+
+.dark .hero-lead {
+  color: rgba(93, 34, 27, 0.86);
+}
+
+.dark .hero-kicker {
+  color: #8f2c25;
+}
+
 .scan-grid {
   position: absolute;
   inset: 0;
