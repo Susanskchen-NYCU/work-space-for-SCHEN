@@ -16,19 +16,21 @@
          Design Tokens
          ============================= */
       :root {
-        --navy: #1a365d;
-        --navy-2: #27476f;
-        --navy-soft: #edf3fb;
+        --navy: #0d178a;
+        --navy-2: #007c89;
+        --navy-soft: #edf7f8;
         --ink: #2d3748;
         --muted: #667085;
-        --line: #d9e2ef;
+        --line: #d7d7d7;
         --paper: #ffffff;
         --surface: #f7fafc;
-        --dark-red: #7a1f22;
-        --dark-red-2: #5b161f;
-        --yellow: #f6c945;
-        --yellow-soft: #fff7d6;
-        --shadow: 0 20px 50px rgba(26, 54, 93, 0.12);
+        --dark-red: #f45106;
+        --dark-red-2: #c43b02;
+        --yellow: #d6d34f;
+        --yellow-soft: #fbfadf;
+        --teal: #007c89;
+        --gray-band: #d7d7d7;
+        --shadow: 0 20px 50px rgba(0, 124, 137, 0.12);
         --radius: 18px;
       }
 
@@ -151,8 +153,8 @@
       }
 
       .nav-links a:hover {
-        background: var(--navy-soft);
-        color: var(--navy);
+        background: var(--yellow-soft);
+        color: var(--teal);
       }
 
       .contact-actions {
@@ -176,7 +178,7 @@
       }
 
       .contact-button:hover {
-        border-color: var(--navy);
+        border-color: var(--teal);
         background: var(--navy-soft);
         transform: translateY(-1px);
       }
@@ -207,8 +209,8 @@
         position: absolute;
         inset: 0;
         background:
-          linear-gradient(90deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.82) 46%, rgba(255, 255, 255, 0.24) 100%),
-          linear-gradient(0deg, rgba(26, 54, 93, 0.12), rgba(26, 54, 93, 0.02));
+          linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.84) 46%, rgba(255, 255, 255, 0.22) 100%),
+          linear-gradient(0deg, rgba(0, 124, 137, 0.11), rgba(244, 81, 6, 0.04));
       }
 
       .hero-content {
@@ -223,7 +225,7 @@
         align-items: center;
         gap: 8px;
         margin: 0 0 18px;
-        border: 1px solid rgba(122, 31, 34, 0.18);
+        border: 1px solid rgba(244, 81, 6, 0.22);
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.72);
         padding: 7px 12px;
@@ -328,11 +330,11 @@
       }
 
       .about-chip {
-        border: 1px solid rgba(122, 31, 34, 0.18);
+        border: 1px solid rgba(0, 124, 137, 0.22);
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.74);
         padding: 8px 12px;
-        color: var(--dark-red);
+        color: var(--teal);
         font-size: 0.85rem;
         font-weight: 850;
       }
@@ -371,11 +373,11 @@
         align-content: space-between;
         border-radius: 28px;
         background:
-          linear-gradient(145deg, rgba(91, 22, 31, 0.96), rgba(122, 31, 34, 0.88)),
+          linear-gradient(145deg, rgba(0, 124, 137, 0.96), rgba(13, 23, 138, 0.9)),
           var(--dark-red);
         padding: clamp(22px, 3vw, 30px);
         color: #fff;
-        box-shadow: 0 20px 50px rgba(91, 22, 31, 0.2);
+        box-shadow: 0 20px 50px rgba(0, 124, 137, 0.22);
       }
 
       .about-panel-label {
@@ -460,16 +462,16 @@
         border-radius: var(--radius);
         background: var(--paper);
         padding: 24px;
-        box-shadow: 0 12px 34px rgba(26, 54, 93, 0.07);
+        box-shadow: 0 12px 34px rgba(0, 124, 137, 0.07);
       }
 
       .publication-year {
         display: inline-flex;
         margin-bottom: 12px;
         border-radius: 999px;
-        background: var(--navy-soft);
+        background: var(--yellow-soft);
         padding: 4px 10px;
-        color: var(--navy);
+        color: var(--teal);
         font-size: 0.78rem;
         font-weight: 900;
       }
@@ -494,17 +496,17 @@
       .paper-tag {
         display: inline-flex;
         align-items: center;
-        border: 1px solid rgba(26, 54, 93, 0.22);
+        border: 1px solid rgba(0, 124, 137, 0.24);
         border-radius: 999px;
         padding: 7px 12px;
-        color: var(--navy);
+        color: var(--teal);
         font-size: 0.82rem;
         font-weight: 800;
         transition: background 160ms ease, color 160ms ease;
       }
 
       .paper-tag:hover {
-        background: var(--navy);
+        background: var(--teal);
         color: #fff;
       }
 
@@ -523,13 +525,13 @@
         border-radius: var(--radius);
         background: var(--paper);
         overflow: hidden;
-        box-shadow: 0 12px 34px rgba(26, 54, 93, 0.07);
+        box-shadow: 0 12px 34px rgba(0, 124, 137, 0.07);
       }
 
       .video-frame {
         position: relative;
         aspect-ratio: 16 / 9;
-        background: var(--navy-soft);
+        background: var(--gray-band);
       }
 
       .video-frame iframe {
@@ -744,7 +746,7 @@
       </section>
 
       <!-- Publications: sample APA-format journal articles ordered newest to oldest -->
-      <section id="publications" class="section" style="background: var(--surface);">
+      <section id="publications" class="section" style="background: linear-gradient(180deg, var(--surface), #fff); border-top: 14px solid var(--gray-band);">
         <div class="container">
           <p class="section-kicker">Publications</p>
           <h2 class="section-title">期刊論文發表</h2>
