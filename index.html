@@ -26,6 +26,8 @@
         --surface: #f7fafc;
         --dark-red: #7a1f22;
         --dark-red-2: #5b161f;
+        --yellow: #f6c945;
+        --yellow-soft: #fff7d6;
         --shadow: 0 20px 50px rgba(26, 54, 93, 0.12);
         --radius: 18px;
       }
@@ -281,17 +283,21 @@
          ============================= */
       .about-grid {
         display: grid;
-        grid-template-columns: 280px minmax(0, 1fr);
-        gap: 48px;
-        align-items: center;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 34px;
+        align-items: stretch;
       }
 
       .portrait-card {
         position: relative;
-        border-radius: 30px;
-        background: linear-gradient(145deg, var(--navy), var(--navy-2));
-        padding: 18px;
-        box-shadow: var(--shadow);
+        align-self: start;
+        border: 1px solid rgba(122, 31, 34, 0.16);
+        border-radius: 24px;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(246, 201, 69, 0.42), transparent 34%),
+          linear-gradient(145deg, #fff, #f3f4f6);
+        padding: 16px;
+        box-shadow: 0 18px 42px rgba(91, 22, 31, 0.12);
       }
 
       .portrait-placeholder {
@@ -299,29 +305,93 @@
         display: grid;
         place-items: center;
         overflow: hidden;
-        border: 6px solid rgba(255, 255, 255, 0.9);
+        width: 150px;
+        margin: 0 auto;
+        border: 5px solid rgba(255, 255, 255, 0.95);
         border-radius: 50%;
         background:
-          radial-gradient(circle at 50% 34%, rgba(255, 255, 255, 0.9) 0 16%, transparent 17%),
-          radial-gradient(circle at 50% 82%, rgba(255, 255, 255, 0.9) 0 32%, transparent 33%),
-          linear-gradient(145deg, #dbe7f5, #f7fafc);
+          radial-gradient(circle at 50% 34%, rgba(255, 255, 255, 0.95) 0 15%, transparent 16%),
+          radial-gradient(circle at 50% 82%, rgba(255, 255, 255, 0.95) 0 30%, transparent 31%),
+          linear-gradient(145deg, var(--dark-red), #8f3a3d);
+        box-shadow: 0 12px 28px rgba(91, 22, 31, 0.22);
       }
 
       .portrait-placeholder span {
-        color: var(--navy);
-        font-size: 3.5rem;
+        color: #fff;
+        font-size: 2.6rem;
         font-weight: 900;
       }
 
+      .portrait-caption {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-align: center;
+      }
+
       .about-text {
-        border-left: 4px solid var(--dark-red);
-        padding-left: 28px;
+        border: 1px solid rgba(45, 55, 72, 0.1);
+        border-radius: 26px;
+        background:
+          linear-gradient(135deg, rgba(255, 247, 214, 0.78), rgba(255, 255, 255, 0.88) 42%),
+          #fff;
+        padding: clamp(24px, 4vw, 38px);
+        box-shadow: 0 18px 48px rgba(45, 55, 72, 0.08);
       }
 
       .about-text p {
         margin: 18px 0 0;
         color: var(--ink);
         font-size: 1.08rem;
+      }
+
+      .about-text .section-title {
+        color: var(--dark-red-2);
+      }
+
+      .about-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .about-chip {
+        border: 1px solid rgba(122, 31, 34, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.74);
+        padding: 8px 12px;
+        color: var(--dark-red);
+        font-size: 0.85rem;
+        font-weight: 850;
+      }
+
+      .about-insights {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .about-insight {
+        border-left: 4px solid var(--yellow);
+        border-radius: 14px;
+        background: rgba(247, 250, 252, 0.86);
+        padding: 16px;
+      }
+
+      .about-insight strong {
+        display: block;
+        color: var(--dark-red-2);
+        font-size: 1rem;
+      }
+
+      .about-insight span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.9rem;
       }
 
       /* =============================
@@ -473,7 +543,7 @@
         }
 
         .portrait-card {
-          max-width: 280px;
+          max-width: 220px;
         }
 
         .hero-meta {
@@ -511,6 +581,10 @@
 
         .footer-inner {
           flex-direction: column;
+        }
+
+        .about-insights {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -575,6 +649,7 @@
             <div class="portrait-placeholder">
               <span>SC</span>
             </div>
+            <p class="portrait-caption">Education researcher · quantitative methods · analytics</p>
           </div>
 
           <div class="about-text">
@@ -582,9 +657,25 @@
             <h2 class="section-title">Research grounded in measurement, learning, and evidence.</h2>
             <p>
               主要研究領域為教育心理學、心理統計學與量化研究方法。致力於將計量方法
-              應用於數位教學與學習成效評估，並透過嚴謹的研究設計與資料分析，協助理解
+              應用於學習與教學分析，並透過嚴謹的研究設計與資料分析，協助理解
               學習歷程、心理特質與教育成效之間的關係。
             </p>
+            <div class="about-highlights" aria-label="Research keywords">
+              <span class="about-chip">Educational Psychology</span>
+              <span class="about-chip">Psychometrics</span>
+              <span class="about-chip">Learning Analytics</span>
+              <span class="about-chip">Teaching Analytics</span>
+            </div>
+            <div class="about-insights" aria-label="Research focus cards">
+              <div class="about-insight">
+                <strong>Measurement with purpose</strong>
+                <span>Connecting rigorous quantitative models with meaningful educational questions.</span>
+              </div>
+              <div class="about-insight">
+                <strong>Analytics for learning</strong>
+                <span>Using evidence to understand learning processes and improve teaching decisions.</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
