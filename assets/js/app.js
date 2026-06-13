@@ -4,12 +4,15 @@ function workspaceApp() {
     activeMission: "teach",
     clock: "",
     copied: false,
+    copiedCitation: "",
     commandOpen: false,
     mobileOpen: false,
     mode: "research",
+    pinnedPublications: [],
     pointer: { x: 600, y: 240 },
     progress: 74,
     publicationQuery: "",
+    publicationPinnedOnly: false,
     publicationTopic: "all",
     publicationYear: "all",
     publications: [],
@@ -116,7 +119,8 @@ function workspaceApp() {
         const matchesText = !term || haystack.includes(term);
         const matchesTopic = this.publicationTopic === "all" || paper.topic === this.publicationTopic;
         const matchesYear = this.publicationYear === "all" || String(paper.year) === String(this.publicationYear);
-        return matchesText && matchesTopic && matchesYear;
+        const matchesPinned = !this.publicationPinnedOnly || this.isPublicationPinned(paper);
+        return matchesText && matchesTopic && matchesYear && matchesPinned;
       });
     },
     get publicationTopics() {
@@ -162,6 +166,7 @@ function workspaceApp() {
     },
     init() {
       this.theme = localStorage.getItem("schen-theme") || "light";
+      this.pinnedPublications = JSON.parse(localStorage.getItem("schen-pinned-publications") || "[]");
       this.updateClock();
       setInterval(() => this.updateClock(), 1000);
 
@@ -200,6 +205,24 @@ function workspaceApp() {
         this.$nextTick(refreshIcons);
       }
     },
+    citationText(paper) {
+      return `${paper.authors} (${paper.year}). ${paper.title}. ${paper.venue}.`;
+    },
+    copyCitation(paper) {
+      const text = this.citationText(paper);
+      const done = () => {
+        this.copiedCitation = paper.title;
+        setTimeout(() => {
+          this.copiedCitation = "";
+        }, 1600);
+      };
+
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      } else {
+        done();
+      }
+    },
     copyRepo() {
       const repoUrl = "https://github.com/Susanskchen-NYCU/work-space-for-SCHEN";
       const done = () => {
@@ -214,6 +237,9 @@ function workspaceApp() {
       } else {
         done();
       }
+    },
+    isPublicationPinned(paper) {
+      return this.pinnedPublications.includes(paper.title);
     },
     resetTilt(event) {
       event.currentTarget.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
@@ -242,6 +268,14 @@ function workspaceApp() {
       this.mode = nextMode;
       const values = { research: 74, teaching: 62, ai: 88 };
       this.progress = values[nextMode];
+    },
+    togglePublicationPin(paper) {
+      if (this.isPublicationPinned(paper)) {
+        this.pinnedPublications = this.pinnedPublications.filter((title) => title !== paper.title);
+      } else {
+        this.pinnedPublications = [...this.pinnedPublications, paper.title];
+      }
+      localStorage.setItem("schen-pinned-publications", JSON.stringify(this.pinnedPublications));
     },
     tiltCard(event) {
       const card = event.currentTarget;

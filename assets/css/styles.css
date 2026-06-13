@@ -374,12 +374,13 @@ body {
 
 .publication-toolbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.25fr) minmax(9rem, 0.18fr);
+  grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.25fr) minmax(9rem, 0.18fr) minmax(9rem, 0.16fr);
   gap: 0.75rem;
 }
 
 .publication-search,
-.publication-select {
+.publication-select,
+.publication-pin-filter {
   min-height: 3.1rem;
   border: 1px solid rgba(16, 20, 25, 0.12);
   border-radius: 999px;
@@ -406,11 +407,33 @@ body {
   padding: 0 1rem;
 }
 
+.publication-pin-filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.publication-pin-filter.is-active {
+  border-color: rgba(122, 31, 34, 0.42);
+  background: rgba(122, 31, 34, 0.12);
+  color: #7a1f22;
+}
+
 .dark .publication-search,
-.dark .publication-select {
+.dark .publication-select,
+.dark .publication-pin-filter {
   border-color: rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.08);
   color: white;
+}
+
+.dark .publication-pin-filter.is-active {
+  border-color: rgba(255, 155, 129, 0.38);
+  background: rgba(255, 155, 129, 0.12);
+  color: #ff9b81;
 }
 
 .publication-stats {
@@ -675,17 +698,55 @@ body {
   color: rgba(255, 255, 255, 0.62);
 }
 
-.publication-link {
+.publication-actions {
   margin-top: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.publication-link,
+.publication-action {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: #7a1f22;
+  border-radius: 999px;
+  padding: 0.42rem 0.68rem;
   font-size: 0.85rem;
   font-weight: 900;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.publication-link {
+  color: #7a1f22;
+}
+
+.publication-action {
+  background: rgba(16, 20, 25, 0.07);
+  color: rgba(16, 20, 25, 0.62);
+}
+
+.publication-action:hover,
+.publication-link:hover {
+  transform: translateY(-1px);
+}
+
+.publication-action.is-active {
+  background: rgba(122, 31, 34, 0.12);
+  color: #7a1f22;
 }
 
 .dark .publication-link {
+  color: #ff9b81;
+}
+
+.dark .publication-action {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.dark .publication-action.is-active {
+  background: rgba(255, 155, 129, 0.14);
   color: #ff9b81;
 }
 

@@ -259,6 +259,10 @@
                 <option :value="year" x-text="year"></option>
               </template>
             </select>
+            <button class="publication-pin-filter" type="button" @click="publicationPinnedOnly = !publicationPinnedOnly" :class="{ 'is-active': publicationPinnedOnly }">
+              <i data-lucide="pin"></i>
+              <span x-text="publicationPinnedOnly ? 'Pinned only' : 'All papers'"></span>
+            </button>
           </div>
 
           <div class="mt-6 grid gap-4 lg:grid-cols-[.34fr_1fr]">
@@ -313,10 +317,20 @@
                   <h3 x-text="paper.title"></h3>
                   <p class="authors" x-text="paper.authors"></p>
                   <p class="venue" x-text="paper.venue"></p>
-                  <a class="publication-link" :href="paper.scholarUrl" target="_blank" rel="noreferrer">
-                    <span>Open in Scholar</span>
-                    <i data-lucide="arrow-up-right"></i>
-                  </a>
+                  <div class="publication-actions">
+                    <button class="publication-action" type="button" @click="togglePublicationPin(paper)" :class="{ 'is-active': isPublicationPinned(paper) }">
+                      <i data-lucide="pin"></i>
+                      <span x-text="isPublicationPinned(paper) ? 'Pinned' : 'Pin'"></span>
+                    </button>
+                    <button class="publication-action" type="button" @click="copyCitation(paper)">
+                      <i data-lucide="copy"></i>
+                      <span x-text="copiedCitation === paper.title ? 'Copied' : 'Copy cite'"></span>
+                    </button>
+                    <a class="publication-link" :href="paper.scholarUrl" target="_blank" rel="noreferrer">
+                      <span>Open in Scholar</span>
+                      <i data-lucide="arrow-up-right"></i>
+                    </a>
+                  </div>
                 </article>
               </template>
               <div class="publication-empty" x-show="filteredPublications.length === 0">
