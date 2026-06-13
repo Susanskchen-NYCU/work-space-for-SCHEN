@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <!--
+      Susan Chen academic personal website
+      Single-file HTML with embedded CSS for easy copying and GitHub Pages deployment.
+      Replace the placeholder Email / YouTube links with final public URLs when ready.
+    -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Susan Chen academic profile, publications, research interests, and teaching lectures.">
+    <title>Susan Chen | Academic Profile</title>
+
+    <style>
+      /* =============================
+         Design Tokens
+         ============================= */
+      :root {
+        --navy: #1a365d;
+        --navy-2: #27476f;
+        --navy-soft: #edf3fb;
+        --ink: #2d3748;
+        --muted: #667085;
+        --line: #d9e2ef;
+        --paper: #ffffff;
+        --surface: #f7fafc;
+        --dark-red: #7a1f22;
+        --dark-red-2: #5b161f;
+        --shadow: 0 20px 50px rgba(26, 54, 93, 0.12);
+        --radius: 18px;
+      }
+
+      /* =============================
+         Base
+         ============================= */
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+        line-height: 1.7;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 88px 0;
+        scroll-margin-top: 92px;
+      }
+
+      .section-title {
+        margin: 0;
+        color: var(--navy);
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+      }
+
+      .section-kicker {
+        margin: 0 0 10px;
+        color: var(--dark-red);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .section-intro {
+        max-width: 720px;
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      /* =============================
+         Header & Navigation
+         ============================= */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.92);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        min-height: 84px;
+      }
+
+      .identity {
+        min-width: 220px;
+      }
+
+      .identity strong {
+        display: block;
+        color: var(--navy);
+        font-size: 1.18rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .identity span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: var(--ink);
+        font-size: 0.95rem;
+        font-weight: 650;
+      }
+
+      .nav-links a {
+        border-radius: 999px;
+        padding: 9px 13px;
+        transition: background 160ms ease, color 160ms ease;
+      }
+
+      .nav-links a:hover {
+        background: var(--navy-soft);
+        color: var(--navy);
+      }
+
+      .contact-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .contact-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 8px 12px;
+        color: var(--navy);
+        font-size: 0.86rem;
+        font-weight: 800;
+        transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+      }
+
+      .contact-button:hover {
+        border-color: var(--navy);
+        background: var(--navy-soft);
+        transform: translateY(-1px);
+      }
+
+      /* =============================
+         Hero
+         ============================= */
+      .hero {
+        position: relative;
+        min-height: 620px;
+        display: grid;
+        align-items: center;
+        overflow: hidden;
+        background: var(--surface);
+      }
+
+      .hero-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.94) brightness(1.02);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.82) 46%, rgba(255, 255, 255, 0.24) 100%),
+          linear-gradient(0deg, rgba(26, 54, 93, 0.12), rgba(26, 54, 93, 0.02));
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        padding: 92px 0;
+      }
+
+      .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 18px;
+        border: 1px solid rgba(122, 31, 34, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        padding: 7px 12px;
+        color: var(--dark-red);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        margin: 0;
+        color: var(--dark-red-2);
+        font-size: clamp(3rem, 8vw, 5.9rem);
+        line-height: 0.96;
+        letter-spacing: -0.045em;
+      }
+
+      .hero-subtitle {
+        max-width: 660px;
+        margin: 24px 0 0;
+        color: var(--ink);
+        font-size: clamp(1.08rem, 2vw, 1.35rem);
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .hero-meta div {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.76);
+        padding: 14px;
+      }
+
+      .hero-meta strong {
+        display: block;
+        color: var(--navy);
+        font-size: 1.4rem;
+        line-height: 1;
+      }
+
+      .hero-meta span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      /* =============================
+         About
+         ============================= */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 48px;
+        align-items: center;
+      }
+
+      .portrait-card {
+        position: relative;
+        border-radius: 30px;
+        background: linear-gradient(145deg, var(--navy), var(--navy-2));
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .portrait-placeholder {
+        aspect-ratio: 1;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border: 6px solid rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 50% 34%, rgba(255, 255, 255, 0.9) 0 16%, transparent 17%),
+          radial-gradient(circle at 50% 82%, rgba(255, 255, 255, 0.9) 0 32%, transparent 33%),
+          linear-gradient(145deg, #dbe7f5, #f7fafc);
+      }
+
+      .portrait-placeholder span {
+        color: var(--navy);
+        font-size: 3.5rem;
+        font-weight: 900;
+      }
+
+      .about-text {
+        border-left: 4px solid var(--dark-red);
+        padding-left: 28px;
+      }
+
+      .about-text p {
+        margin: 18px 0 0;
+        color: var(--ink);
+        font-size: 1.08rem;
+      }
+
+      /* =============================
+         Publications
+         ============================= */
+      .publication-list {
+        display: grid;
+        gap: 20px;
+        margin-top: 34px;
+      }
+
+      .publication-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        padding: 24px;
+        box-shadow: 0 12px 34px rgba(26, 54, 93, 0.07);
+      }
+
+      .publication-year {
+        display: inline-flex;
+        margin-bottom: 12px;
+        border-radius: 999px;
+        background: var(--navy-soft);
+        padding: 4px 10px;
+        color: var(--navy);
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .apa {
+        margin: 0;
+        color: var(--ink);
+        font-size: 1rem;
+      }
+
+      .apa b {
+        color: var(--dark-red);
+      }
+
+      .paper-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .paper-tag {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid rgba(26, 54, 93, 0.22);
+        border-radius: 999px;
+        padding: 7px 12px;
+        color: var(--navy);
+        font-size: 0.82rem;
+        font-weight: 800;
+        transition: background 160ms ease, color 160ms ease;
+      }
+
+      .paper-tag:hover {
+        background: var(--navy);
+        color: #fff;
+      }
+
+      /* =============================
+         Teaching Videos
+         ============================= */
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 34px;
+      }
+
+      .video-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        overflow: hidden;
+        box-shadow: 0 12px 34px rgba(26, 54, 93, 0.07);
+      }
+
+      .video-frame {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background: var(--navy-soft);
+      }
+
+      .video-frame iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .video-body {
+        padding: 20px;
+      }
+
+      .video-body h3 {
+        margin: 0;
+        color: var(--navy);
+        font-size: 1.15rem;
+      }
+
+      .video-body p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      /* =============================
+         Footer
+         ============================= */
+      .site-footer {
+        border-top: 1px solid var(--line);
+        background: var(--surface);
+        padding: 30px 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      /* =============================
+         Responsive Design
+         ============================= */
+      @media (max-width: 920px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 0;
+        }
+
+        .nav-links,
+        .contact-actions {
+          flex-wrap: wrap;
+          justify-content: flex-start;
+        }
+
+        .about-grid,
+        .video-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .portrait-card {
+          max-width: 280px;
+        }
+
+        .hero-meta {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .container {
+          width: min(100% - 28px, 1120px);
+        }
+
+        .section {
+          padding: 64px 0;
+        }
+
+        .hero {
+          min-height: 680px;
+        }
+
+        .hero::after {
+          background: linear-gradient(0deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.7));
+        }
+
+        .contact-button,
+        .nav-links a {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .contact-actions,
+        .nav-links {
+          width: 100%;
+        }
+
+        .footer-inner {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header: name, title, anchor navigation, and contact links -->
+    <header class="site-header">
+      <div class="container nav">
+        <a class="identity" href="#top" aria-label="Back to top">
+          <strong>Susan Chen</strong>
+          <span>國立陽明交通大學 教育研究所 博士後研究員</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#about">About</a>
+          <a href="#publications">Publications</a>
+          <a href="#teaching">Teaching</a>
+        </nav>
+
+        <div class="contact-actions" aria-label="Contact links">
+          <!-- TODO: Replace email address with the final public academic email. -->
+          <a class="contact-button" href="mailto:susan.chen@nycu.edu.tw">Email</a>
+          <a class="contact-button" href="https://scholar.google.com.tw/citations?hl=zh-TW&user=XQLAldAAAAAJ" target="_blank" rel="noreferrer">Scholar</a>
+          <a class="contact-button" href="https://github.com/susanskchen-NYCU/susan-chen-space" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero: selected right-bottom education research photo -->
+      <section class="hero" aria-label="Susan Chen academic profile">
+        <img class="hero-image" src="assets/images/hero-education-research.png" alt="Education research workspace with journals, laptop, and academic materials">
+        <div class="container hero-content">
+          <p class="hero-label">Educational Psychology · Quantitative Methods · Learning Assessment</p>
+          <h1>Susan Chen</h1>
+          <p class="hero-subtitle">
+            Academic researcher working at the intersection of educational psychology,
+            psychometrics, quantitative methodology, and digital learning assessment.
+          </p>
+          <div class="hero-meta" aria-label="Research highlights">
+            <div>
+              <strong>24</strong>
+              <span>Scholar publications</span>
+            </div>
+            <div>
+              <strong>1,011</strong>
+              <span>Google Scholar citations</span>
+            </div>
+            <div>
+              <strong>3</strong>
+              <span>Core research domains</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Me: portrait placeholder plus short academic biography -->
+      <section id="about" class="section">
+        <div class="container about-grid">
+          <div class="portrait-card" aria-label="Portrait placeholder">
+            <div class="portrait-placeholder">
+              <span>SC</span>
+            </div>
+          </div>
+
+          <div class="about-text">
+            <p class="section-kicker">About Me</p>
+            <h2 class="section-title">Research grounded in measurement, learning, and evidence.</h2>
+            <p>
+              主要研究領域為教育心理學、心理統計學與量化研究方法。致力於將計量方法
+              應用於數位教學與學習成效評估，並透過嚴謹的研究設計與資料分析，協助理解
+              學習歷程、心理特質與教育成效之間的關係。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Publications: sample APA-format journal articles ordered newest to oldest -->
+      <section id="publications" class="section" style="background: var(--surface);">
+        <div class="container">
+          <p class="section-kicker">Publications</p>
+          <h2 class="section-title">期刊論文發表</h2>
+          <p class="section-intro">
+            以下以 APA 格式呈現範例論文；作者中的 <strong style="color: var(--dark-red);">Chen, S.</strong>
+            已特別標註，便於辨識主要研究者。
+          </p>
+
+          <div class="publication-list">
+            <article class="publication-card">
+              <span class="publication-year">2026</span>
+              <p class="apa">
+                <b>Chen, S.</b>, Lin, S. S. J., & Chen, Y. F. (2026). Progress of peer collaborative problem solving
+                and the role of teachers in STEM classes: A comparison of groups with high and low prior knowledge
+                with epistemic network analysis. <em>Interactive Learning Environments</em>.
+              </p>
+              <div class="paper-actions">
+                <a class="paper-tag" href="#" aria-label="DOI link placeholder">DOI Link</a>
+                <a class="paper-tag" href="#" aria-label="PDF download placeholder">PDF Download</a>
+              </div>
+            </article>
+
+            <article class="publication-card">
+              <span class="publication-year">2023</span>
+              <p class="apa">
+                <b>Chen, S.</b>, Yang, Y. T. C., Lin, C. P., & Lin, S. S. J. (2023). Dispositions of 21st-century
+                skills in STEM programs and their changes over time. <em>International Journal of Science and
+                Mathematics Education, 21</em>(4), 1363-1380.
+              </p>
+              <div class="paper-actions">
+                <a class="paper-tag" href="#" aria-label="DOI link placeholder">DOI Link</a>
+                <a class="paper-tag" href="#" aria-label="PDF download placeholder">PDF Download</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teaching videos: responsive 16:9 iframe cards. Replace VIDEO_ID values with public YouTube video IDs. -->
+      <section id="teaching" class="section">
+        <div class="container">
+          <p class="section-kicker">Teaching & YouTube Lectures</p>
+          <h2 class="section-title">教學影片</h2>
+          <p class="section-intro">
+            這一區展示公開教學影片。請將 iframe 的 <code>VIDEO_ID_1</code> 與 <code>VIDEO_ID_2</code>
+            替換為實際公開 YouTube 影片 ID。
+          </p>
+
+          <div class="video-grid">
+            <article class="video-card">
+              <div class="video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/VIDEO_ID_1"
+                  title="單元一：量化研究法基礎"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="video-body">
+                <h3>單元一：量化研究法基礎</h3>
+                <p>介紹量化研究問題、變項設計、資料型態與基本研究流程。</p>
+              </div>
+            </article>
+
+            <article class="video-card">
+              <div class="video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/VIDEO_ID_2"
+                  title="單元二：心理統計與學習評估"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="video-body">
+                <h3>單元二：心理統計與學習評估</h3>
+                <p>說明如何以統計模型理解學習成效、心理特質與教育評量資料。</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Susan Chen. All rights reserved.</span>
+        <span>Academic website built for GitHub Pages.</span>
+      </div>
+    </footer>
+  </body>
+</html>
