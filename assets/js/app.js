@@ -125,6 +125,22 @@ function workspaceApp() {
     get publicationYears() {
       return [...new Set(this.publications.map((paper) => paper.year))].sort((a, b) => b - a);
     },
+    get publicationTimeline() {
+      const counts = this.publicationYears.map((year) => ({
+        year,
+        count: this.publications.filter((paper) => paper.year === year).length
+      }));
+      const max = Math.max(...counts.map((item) => item.count), 1);
+      return counts.map((item) => ({
+        ...item,
+        width: Math.max(12, Math.round((item.count / max) * 100))
+      }));
+    },
+    get topPublications() {
+      return [...this.publications]
+        .sort((a, b) => Number(b.citations || 0) - Number(a.citations || 0))
+        .slice(0, 3);
+    },
     get totalCitations() {
       return this.publications.reduce((sum, paper) => sum + Number(paper.citations || 0), 0);
     },

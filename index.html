@@ -275,9 +275,34 @@
                 <span x-text="publicationYears[0] || '—'"></span>
                 <small>Latest year</small>
               </div>
+              <div class="timeline-card">
+                <small>Year map</small>
+                <template x-for="item in publicationTimeline" :key="item.year">
+                  <button class="timeline-row" type="button" @click="publicationYear = String(item.year)">
+                    <span x-text="item.year"></span>
+                    <b :style="`width:${item.width}%`"></b>
+                    <em x-text="item.count"></em>
+                  </button>
+                </template>
+              </div>
             </aside>
 
             <div class="publication-list reveal">
+              <div class="featured-publications" x-show="topPublications.length">
+                <div class="featured-heading">
+                  <p class="kicker">Featured</p>
+                  <h3>Top cited work</h3>
+                </div>
+                <div class="featured-grid">
+                  <template x-for="paper in topPublications" :key="paper.title">
+                    <a class="featured-paper" :href="paper.scholarUrl" target="_blank" rel="noreferrer">
+                      <span x-text="`${paper.citations} cites`"></span>
+                      <strong x-text="paper.title"></strong>
+                      <small x-text="`${paper.year} · ${paper.topic}`"></small>
+                    </a>
+                  </template>
+                </div>
+              </div>
               <template x-for="paper in filteredPublications" :key="paper.title">
                 <article class="publication-item">
                   <div class="flex flex-wrap items-center gap-2">
